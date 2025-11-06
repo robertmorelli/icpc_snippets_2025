@@ -16,7 +16,9 @@ jobs:
           typst-version: 0.13.0
           allow-prereleases: true
       - name: "make pdf"
-        run: make
+        run: |
+          git pull
+          make
       - name: Commit files
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -27,4 +29,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
-  
