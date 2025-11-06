@@ -1,7 +1,2 @@
-# snippet template
-Template for a repo of snippets that automatically creates a pdf
-
-#### deploys [here](https://robertmorelli.github.io/icpc_snippets_2025):
-```
-https://robertmorelli.github.io/icpc_snippets_2025
-```
+# Big Cottonwood Coders ICPC Snippets 2025 
+Snippets we think might be useful for ICPC 2025
