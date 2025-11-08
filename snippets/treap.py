@@ -32,6 +32,27 @@ def insert(root, key):
             root = rotate_left(root)
     return root
 
+def delete(root, key):
+    if not root:
+        return None
+    if key < root.key:
+        root.left = delete(root.left, key)
+    elif key > root.key:
+        root.right = delete(root.right, key)
+    else:  # key == root.key
+        if not root.left:
+            return root.right
+        elif not root.right:
+            return root.left
+        else:
+            if root.left.priority > root.right.priority:
+                root = rotate_right(root)
+                root.right = delete(root.right, key)
+            else:
+                root = rotate_left(root)
+                root.left = delete(root.left, key)
+    return root
+
 def search(Treap, key):
     while Treap:
         if key == Treap.key:
@@ -55,6 +76,7 @@ if __name__ == "__main__":
     for v in vals:
         root = insert(root, v)
 
+    print("Initial tree:")
     print_tree(root)
 
     q = vals[5]
@@ -64,3 +86,7 @@ if __name__ == "__main__":
         print(f"Found {found.key} (p={found.priority})")
     else:
         print("Not found")
+
+    print(f"\nDeleting {q}:")
+    root = delete(root, q)
+    print_tree(root)
