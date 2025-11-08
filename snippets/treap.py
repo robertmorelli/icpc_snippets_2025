@@ -3,7 +3,7 @@ import random
 class Treap:
     def __init__(self, key):
         self.key = key
-        self.priority = random.getrandbits(64)  # true random 64-bit priority
+        self.priority = random.getrandbits(64)
         self.left = None
         self.right = None
 
@@ -32,6 +32,16 @@ def insert(root, key):
             root = rotate_left(root)
     return root
 
+def search(Treap, key):
+    while Treap:
+        if key == Treap.key:
+            return Treap
+        elif key < Treap.key:
+            Treap = Treap.left
+        else:
+            Treap = Treap.right
+    return None
+
 def print_tree(Treap, indent=0):
     if Treap:
         print_tree(Treap.right, indent + 4)
@@ -39,9 +49,18 @@ def print_tree(Treap, indent=0):
         print_tree(Treap.left, indent + 4)
 
 if __name__ == "__main__":
-    random.seed(42)  # optional: deterministic output
-    root = None
+    random.seed(42)
     vals = random.sample(range(100), 20)
+    root = None
     for v in vals:
         root = insert(root, v)
+
     print_tree(root)
+
+    q = vals[5]
+    print(f"\nSearching for {q}:")
+    found = search(root, q)
+    if found:
+        print(f"Found {found.key} (p={found.priority})")
+    else:
+        print("Not found")
